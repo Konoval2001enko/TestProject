@@ -27,9 +27,8 @@ namespace TestProject.BLL.Services
             Database = uow;
         }
 
-        public void ValidateProduct(ProductDTO productDTO, Category category)
+        private void ValidateProduct(ProductDTO productDTO, Category category)
         {
-
             if (category == null)
                 throw new ValidationException("Категория не найдена", "");
             string validate = "";
@@ -86,21 +85,19 @@ namespace TestProject.BLL.Services
             Database.Products.Update(product);
             Database.Save();
         }
-        public void DeleteProduct(int? id)
+        public void DeleteProduct(int id)
         {
-            if (id == null)
-                throw new ValidationException("Неверный id", "");
-            Database.Products.Delete(id.Value);
+            Database.Products.Delete(id);
             Database.Save();
         }
         public IEnumerable<ProductDTO> GetProducts()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()
-            .ForMember("Category", opt => opt.MapFrom(src => new CategoryDTO()
+            var mapper = new MapperConfiguration(cfg =>
             {
-                Id = src.Category.Id,
-                Name = src.Category.Name
-            }))).CreateMapper();
+                cfg.CreateMap<Product, ProductDTO>();
+                cfg.CreateMap<Category, CategoryDTO>();
+            }
+            ).CreateMapper();
             return mapper.Map<IEnumerable<Product>, List<ProductDTO>>(Database.Products.GetAll());
         }
 
@@ -109,28 +106,27 @@ namespace TestProject.BLL.Services
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryDTO>()).CreateMapper();
             return mapper.Map<IEnumerable<Category>, List<CategoryDTO>>(Database.Categories.GetAll());
         }
-        public IEnumerable<ProductDTO> GetSpecificProducts(int? id)
+        public IEnumerable<ProductDTO> GetSpecificProducts(int id)
         {
-            if (id == null)
-                throw new ValidationException("Не установлено id категории", "");
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()
-            .ForMember("Category", opt => opt.MapFrom(src => new CategoryDTO()
+            var mapper = new MapperConfiguration(cfg =>
             {
-                Id = src.Category.Id,
-                Name = src.Category.Name
-            }))).CreateMapper();
-            return mapper.Map<IEnumerable<Product>, List<ProductDTO>>(Database.Products.Find(x => x.CategoryId == id.Value));
+                cfg.CreateMap<Product, ProductDTO>();
+                cfg.CreateMap<Category, CategoryDTO>();
+            }
+            ).CreateMapper();
+            return mapper.Map<IEnumerable<Product>, List<ProductDTO>>(Database.Products.Find(x => x.CategoryId == id));
         }
 
         public IEnumerable<ProductDTO> SearchProducts(string name)
         {
             if (name == null) name = "";
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()
-            .ForMember("Category", opt => opt.MapFrom(src => new CategoryDTO()
-            {
-                Id = src.Category.Id,
-                Name = src.Category.Name
-            }))).CreateMapper();
+            var mapper = new MapperConfiguration(cfg =>
+
+                {
+                    cfg.CreateMap<Product, ProductDTO>();
+                    cfg.CreateMap<Category, CategoryDTO>();
+                }
+            ).CreateMapper();
             return mapper.Map<IEnumerable<Product>, List<ProductDTO>>(Database.Products.Find(x => x.Name.ToLower().Contains(name.ToLower())));
         }
 
@@ -142,12 +138,12 @@ namespace TestProject.BLL.Services
                 double _maxValue = maxValue != null ? double.Parse(maxValue.Replace(".", ",")) : double.MaxValue;
 
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()
-            .ForMember("Category", opt => opt.MapFrom(src => new CategoryDTO()
-            {
-                Id = src.Category.Id,
-                Name = src.Category.Name
-            }))).CreateMapper();
+                var mapper = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Product, ProductDTO>();
+                    cfg.CreateMap<Category, CategoryDTO>();
+                }
+            ).CreateMapper();
                 return mapper.Map<IEnumerable<Product>, List<ProductDTO>>(Database.Products.Find(x => x.Price >= _minValue && x.Price <= _maxValue));
             }
             catch (FormatException ex)
@@ -156,11 +152,9 @@ namespace TestProject.BLL.Services
             }
         }
 
-        public ProductDTO GetProduct(int? id)
+        public ProductDTO GetProduct(int id)
         {
-            if (id == null)
-                throw new ValidationException("Не установлено id продукта", "");
-            var product = Database.Products.Get(id.Value);
+            var product = Database.Products.Get(id);
             if (product == null)
                 throw new ValidationException("Продукт не найден", "");
 
@@ -176,11 +170,9 @@ namespace TestProject.BLL.Services
             };
         }
 
-        public CategoryDTO GetCategory(int? id)
+        public CategoryDTO GetCategory(int id)
         {
-            if (id == null)
-                throw new ValidationException("Не установлено id категории", "");
-            var category = Database.Categories.Get(id.Value);
+            var category = Database.Categories.Get(id);
             if (category == null)
                 throw new ValidationException("Категория не найдена", "");
 
@@ -210,45 +202,34 @@ namespace TestProject.BLL.Services
             Database.Categories.Update(categoryUpdate);
             Database.Save();
         }
-        public void DeleteCategory(int? id)
+        public void DeleteCategory(int id)
         {
-            if (id == null)
-                throw new ValidationException("Неверный id", "");
-            Database.Categories.Delete(id.Value);
+            Database.Categories.Delete(id);
             Database.Save();
         }
-        public void Dispose()
-        {
-            Database.Dispose();
-        }
-
         public async Task Login(Microsoft.AspNetCore.Http.HttpContext context, String login, String password)
         {
             var users = Database.Users.Find(x => x.Login.Equals(login) && x.Password.Equals(password));
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
-            .ForMember("Role", opt => opt.MapFrom(src => new RoleDTO()
+            var mapper = new MapperConfiguration(cfg =>
             {
-                Id = src.Role.Id,
-                Name = src.Role.Name
-            }))).CreateMapper();
+                cfg.CreateMap<User, UserDTO>();
+                cfg.CreateMap<Role, RoleDTO>();
+            }
+            ).CreateMapper();
             if (users.Count() != 1)
-                throw new ValidationException("Неверный логин или пароль","");
+                throw new ValidationException("Неверный логин или пароль", "");
             var userDTO = mapper.Map<User, UserDTO>(users.First());
 
             if (users.Count() == 1)
             {
-
-                // создаем один claim
                 var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userDTO.Login),
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, userDTO.Role.Name)
             };
-                // создаем объект ClaimsIdentityc
                 ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
                     ClaimsIdentity.DefaultRoleClaimType);
-                // установка аутентификационных куки
                 await AuthenticationHttpContextExtensions.SignInAsync(context, new ClaimsPrincipal(id));
 
             }

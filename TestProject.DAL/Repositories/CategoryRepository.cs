@@ -23,11 +23,6 @@ namespace TestProject.DAL.Repositories
         {
             return db.Categories;
         }
-
-        //public Category Get(string name)
-        //{
-        //    return db.Categories.Where(x => x.Name.Equals(name)).FirstOrDefault();
-        //}
         public Category Get(int id)
         {
             return db.Categories.Find(id);

@@ -52,10 +52,6 @@ namespace TestProject.Webs.Controllers
             try
             {
                 var category = _catalogService.GetCategory(categoryId);
-                if (price.Contains("."))
-                {
-                    price=price.Replace(".", ",");
-                }
       
                 var productDTO = new ProductDTO { Name = name, Category = category, Discription=discription, Price= float.Parse(price), GeneralNote=generalNote, SpecialNote=specialNote };
                 _catalogService.AddProduct(productDTO);
@@ -94,7 +90,7 @@ namespace TestProject.Webs.Controllers
             try
             {
                 var category = _catalogService.GetCategory(categoryId);
-                var productDTO = new ProductDTO {Id=id, Name = name, Category = category, Discription = discription, Price = float.Parse(price.Replace(".", ",")), GeneralNote = generalNote, SpecialNote = specialNote };
+                var productDTO = new ProductDTO {Id=id, Name = name, Category = category, Discription = discription, Price = float.Parse(price), GeneralNote = generalNote, SpecialNote = specialNote };
                 _catalogService.UpdateProduct(productDTO);
                 return Redirect("/Catalog/Products");
             }
