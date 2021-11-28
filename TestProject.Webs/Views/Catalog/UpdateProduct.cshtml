@@ -1,0 +1,63 @@
+﻿@{ ViewBag.Title = "Обновить продукт";}
+
+
+<form method="POST" action="/Catalog/UpdateNewProduct">
+    <table class="data-form">
+        <caption>Обновление продукта</caption>
+        <tr>
+            <td>Наименование</td>
+            <td>
+                <input name="Id" value="@ViewBag.Product.Id" hidden />
+                <input name="Name" type="text" value="@ViewBag.Product.Name" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <select name="CategoryId">
+                    <option disabled>Выберите категорию</option>
+                    @foreach (CategoryViewModel category in ViewBag.Categories)
+                    {
+                        if (@category.Id == @ViewBag.Product.CategoryId)
+                        {
+                            <option selected value="@category.Id">@category.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Описание</td>
+            <td>
+                <input name="Discription" type="text" value="@ViewBag.Product.Discription" />
+            </td>
+        </tr>
+        <tr>
+            <td>Стоимость в рублях</td>
+            <td>
+                <input name="Price" type="text" value="@ViewBag.Product.Price" />
+            </td>
+        </tr>
+        <tr>
+            <td>Примечание общее</td>
+            <td>
+                <input name="GeneralNote" type="text" value="@ViewBag.Product.GeneralNote" />
+            </td>
+        </tr>
+        <tr>
+            <td>Примечание специальное</td>
+            <td>
+                <input name="SpecialNote" type="text" value="@ViewBag.Product.SpecialNote" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <input class="link-button" type="submit" value="Обновить" />
+            </td>
+        </tr>
+    </table>
+</form>
+

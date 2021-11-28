@@ -1,0 +1,19 @@
+﻿@{ ViewBag.Title = "Удалить категорию";}
+
+<form method="POST" action="/Catalog/DeleteCategoryPost">
+    <table class="data-form">
+        <caption>Удаление категории</caption>
+        <tr>
+            <td>Название</td>
+            <td>
+                <input name="Id" value="@ViewBag.Category.Id" hidden />
+                <input type="text" value="@ViewBag.Category.Name" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <input class="link-button" type="submit" value="Удалить" />
+            </td>
+        </tr>
+    </table>
+</form>

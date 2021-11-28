@@ -1,0 +1,54 @@
+﻿@{ ViewBag.Title = "Добавить продукт";}
+
+<form method="POST" action="/Catalog/AddNewProduct">
+        <table class="data-form">
+            <caption>Добавление продукта</caption>
+            <tr>
+                <td>Наименование</td>
+                <td>
+                    <input name="Name" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;">
+                    <select name="CategoryId">
+                        <option disabled>Выберите категорию</option>
+                        @foreach (CategoryViewModel category in ViewBag.Categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>            
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Описание</td>
+                <td>
+                    <input name="Discription" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>Стоимость в рублях</td>
+                <td>
+                    <input name="Price" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>Примечание общее</td>
+                <td>
+                    <input name="GeneralNote" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>Примечание специальное</td>
+                <td>
+                    <input name="SpecialNote" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;">
+                    <input class="link-button" type="submit" value="Добавить" />
+                </td>
+            </tr>
+        </table>
+</form>
+

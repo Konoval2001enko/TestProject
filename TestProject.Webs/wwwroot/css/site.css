@@ -1,0 +1,170 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+table {
+    border-collapse: collapse;
+    border-left: 3px solid #F79361;
+    border-right: 3px solid #F79361;
+    border-bottom: 3px solid #F79361;
+    margin: auto;
+}
+
+    table caption {
+        background: #F79361;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.3);
+        color: white;
+        font-family: "Roboto Slab",serif;
+        font-style: normal;
+        font-size: 26px;
+        text-align: center;
+        caption-side: top;
+        margin: 0;
+    }
+
+    table td, table th {
+        padding: 10px;
+    }
+
+    table td {
+        text-align: center;
+        font-size: 18px;
+        padding: 20px;
+    }
+
+    table tr:first-child {
+        font-weight: bold;
+    }
+
+    table tr:nth-child(2n) {
+        background: #E5E5E5;
+    }
+
+    table a {
+        display: inline-block;
+        padding: 5px 10px;
+        /*box-shadow: 2px 2px 0 0 #a22800;*/
+        position: relative;
+    }
+
+        table a:hover {
+            /*box-shadow: none;*/
+            top: 2px;
+            left: 2px;
+        }
+
+.data-form tr:first-child {
+    font-weight: normal
+}
+
+.data-form tr:nth-child(2n) {
+    background: #fff;
+}
+
+.data-form td:first-of-type {
+    text-align: left;
+}
+
+.link-button {
+    border: 1px solid #F79361;
+    text-decoration: none;
+    display: inline-block;
+    /*line-height: 45px;*/
+    border-radius: 45px;
+    margin: auto;
+    padding: 10px 40px;
+    font-family: "Roboto Slab",serif;
+    font-size: 26px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    color: #524f4e;
+    background: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+}
+
+    .link-button:hover {
+        background: #F79361;
+        box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
+        color: white;
+        transform: translateY(-7px);
+    }
+
+.login-form {
+    margin: auto;
+}

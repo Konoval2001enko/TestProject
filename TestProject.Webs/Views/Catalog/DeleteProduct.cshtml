@@ -1,0 +1,50 @@
+﻿@{ ViewBag.Title = "Удалить продукт";}
+
+<form method="POST" action="/Catalog/DeleteProductPost">
+    <table class="data-form">
+        <caption>Удаление продукта</caption>
+        <tr>
+            <td>Наименование</td>
+            <td>
+                <input name="Id" value="@ViewBag.Product.Id" hidden />
+                <input name="Name" type="text" value="@ViewBag.Product.Name" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Категория</td>
+            <td>
+                <input type="text" value="@ViewBag.Product.CategoryName" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Описание</td>
+            <td>
+                <input name="Discription" type="text" value="@ViewBag.Product.Discription" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Стоимость в рублях</td>
+            <td>
+                <input name="Price" type="text" value="@ViewBag.Product.Price" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Примечание общее</td>
+            <td>
+                <input name="GeneralNote" type="text" value="@ViewBag.Product.GeneralNote" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>Примечание специальное</td>
+            <td>
+                <input name="SpecialNote" type="text" value="@ViewBag.Product.SpecialNote" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <input class="link-button" type="submit" value="Удалить" />
+            </td>
+        </tr>
+    </table>
+</form>
+

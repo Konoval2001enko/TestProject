@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Поиск по наименованию";
+
+}
+
+<div class="text-center">
+
+    <form id="form" class="main-form" asp-controller="Catalog" asp-action="SearchProducts" method="get">
+
+        <table class="table-condensed">
+            <caption>
+                <div>
+                    Поиск по наименованю<br />
+                    <input type="text" name="name" value="@ViewBag.Name" placeholder="Наименование" />
+                    <input type="submit" class="link-button" value="Поиск" />
+                </div>1
+            </caption>
+            <tr>
+                <td>Наименование</td>
+                <td>Категория</td>
+                <td>Описание</td>
+                <td>Стоимость в рублях</td>
+                <td>Примечание общее</td>
+                @if (!ViewBag.User.Equals("SimpleUser"))
+                {
+                    <td>Примечание специальное</td>
+                }
+            </tr>
+            @foreach (var product in ViewBag.Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.CategoryName</td>
+                    <td>@product.Discription</td>
+                    <td>@product.Price</td>
+                    <td>@product.GeneralNote</td>
+                    @if (!ViewBag.User.Equals("SimpleUser"))
+                    {
+                        <td>@product.SpecialNote</td>
+                    }
+                </tr>
+            }
+        </table>
+    </form>
+</div>

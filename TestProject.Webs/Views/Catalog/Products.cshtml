@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Все продукты";
+}
+
+<div class="table_price">
+
+    <form id="form" class="main-form" method="GET">
+        <table class="table-condensed">
+            <caption>Каталог продуктов</caption>
+            <tr>
+                <td>Наименование</td>
+                <td>Категория</td>
+                <td>Описание</td>
+                <td>Стоимость в рублях</td>
+                <td>Примечание общее</td>
+                @if (!ViewBag.User.Equals("SimpleUser"))
+                {
+                    <td>Примечание специальное</td>
+                    <td colspan="2" style="border-left:2px">
+                        <a asp-action="AddProduct">Создать</a>
+                    </td>
+                }
+            </tr>
+            @foreach (var product in ViewBag.Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.CategoryName</td>
+                    <td>@product.Discription</td>
+                    <td>@product.Price</td>
+                    <td>@product.GeneralNote</td>
+
+                    @if (!ViewBag.User.Equals("SimpleUser"))
+                    {
+                        <td>@product.SpecialNote</td>
+                        <td>
+                            <a asp-action="UpdateProduct" asp-route-id="@product.Id">Изменить</a>
+                        </td>
+                        <td>
+                            <a asp-action="DeleteProduct" asp-route-id="@product.Id">Удалить</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    </form>
+</div>

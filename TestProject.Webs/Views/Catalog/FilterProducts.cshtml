@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Фильтр по цене";
+
+}
+
+<div class="text-center">
+
+    <form id="form" class="main-form" asp-controller="Catalog" asp-action="FilterProducts" method="get">
+        <table class="table-condensed">
+            <caption>
+                <div>
+                    Фильтр по стоимости<br />
+                    <input type="text" name="minValue" value="@ViewBag.MinValue" placeholder="Минимальная" />
+                    <input type="text" name="maxValue" value="@ViewBag.MaxValue" placeholder="Максимальная" />
+                    <input type="submit" value="Фильтр" class="link-button" />
+                </div>
+            </caption>
+            <tr>
+                <td>Наименование</td>
+                <td>Категория</td>
+                <td>Описание</td>
+                <td>Стоимость в рублях</td>
+                <td>Примечание общее</td>
+                @if (!ViewBag.User.Equals("SimpleUser"))
+                {
+                    <td>Примечание специальное</td>
+                }
+            </tr>
+            @foreach (var product in ViewBag.Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.CategoryName</td>
+                    <td>@product.Discription</td>
+                    <td>@product.Price</td>
+                    <td>@product.GeneralNote</td>
+                    @if (!ViewBag.User.Equals("SimpleUser"))
+                    {
+                        <td>@product.SpecialNote</td>
+                    }
+                </tr>
+            }
+        </table>
+    </form>
+</div>

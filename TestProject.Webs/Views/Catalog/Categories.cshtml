@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Все категории";
+}
+
+<div class="text-center">
+    <form id="form" class="main-form" method="GET">
+        <table class="table-condensed">
+            <caption>Список категорий</caption>
+            <tr>
+                @if (ViewBag.User.Equals("Administrator"))
+                {
+                    <td>Категория</td>
+                    <td colspan="3">
+                        <a asp-action="AddCategory">Добавить</a>
+                    </td>
+                }
+            </tr>
+            @foreach (var category in ViewBag.Categories)
+            {
+                <tr>
+                    <td>@category.Name</td>
+
+                    @if (ViewBag.User.Equals("Administrator"))
+                    {
+
+                        <td>
+                            <a asp-action="UpdateCategory" asp-route-id="@category.Id">Изменить</a>
+                        </td>
+                        <td>
+                            <a asp-action="SpecificCategory" asp-route-id="@category.Id">Элементы</a>
+                        </td>
+                        <td>
+                            <a asp-action="DeleteCategory" asp-route-id="@category.Id">Удалить</a>
+                        </td>
+                    }
+                    else
+                    {
+
+                        <td>
+                            <a asp-action="SpecificCategory" asp-route-id="@category.Id">Элементы</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    </form>
+</div>
