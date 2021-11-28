@@ -134,8 +134,8 @@ namespace TestProject.BLL.Services
         {
             try
             {
-                double _minValue = minValue != null ? double.Parse(minValue.Replace(".", ",")) : 0.0;
-                double _maxValue = maxValue != null ? double.Parse(maxValue.Replace(".", ",")) : double.MaxValue;
+                double _minValue = minValue != null ? double.Parse(minValue) : 0.0;
+                double _maxValue = maxValue != null ? double.Parse(maxValue) : double.MaxValue;
 
 
                 var mapper = new MapperConfiguration(cfg =>

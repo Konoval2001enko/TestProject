@@ -79,6 +79,7 @@ table {
     border-right: 3px solid #F79361;
     border-bottom: 3px solid #F79361;
     margin: auto;
+    width:100%;
 }
 
     table caption {
@@ -127,6 +128,9 @@ table {
             left: 2px;
         }
 
+        table select{ min-width:70%;
+                      margin:auto;
+        }
 .data-form tr:first-child {
     font-weight: normal
 }
